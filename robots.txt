@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://lameraleche94.github.io/mapa-gta6-leonida/sitemap.xml
