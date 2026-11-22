@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Mapa interactivo de GTA 6 — Leonida y Vice City: lugares y secretos</title>
+<meta name="description" content="Mapa interactivo de GTA 6 (Grand Theft Auto VI): explora Leonida y Vice City con 81 lugares, regiones, puntos de interés y los sitios reales de Florida que los inspiraron. Gratis, en español.">
+<meta name="keywords" content="GTA 6, Grand Theft Auto VI, mapa interactivo, mapa GTA 6, Leonida, Vice City, lugares GTA 6, mapa de Leonida">
+<meta name="robots" content="index, follow">
+<meta name="author" content="PINEDA — @pineda_gta6">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Mapa interactivo de GTA 6 — Leonida y Vice City">
+<meta property="og:description" content="Explora el mapa de Leonida y Vice City: 81 lugares, regiones y secretos de GTA 6, con la inspiración real de cada sitio.">
+<meta property="og:image" content="hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mapa interactivo de GTA 6 — Leonida y Vice City">
+<meta name="twitter:description" content="81 lugares y secretos del mapa de GTA 6 en Leonida y Vice City. Explóralo gratis, en español.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Mapa interactivo de GTA 6 — Leonida","inLanguage":"es","description":"Mapa interactivo de Grand Theft Auto VI: Leonida y Vice City con 81 lugares, regiones y puntos de interés.","author":{"@type":"Person","name":"PINEDA"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f8; --panel:#ffffff; --panel2:#eef2f5; --ink:#14202e; --muted:#5b6b7c;
+  --line:#d9e2ea; --pink:#e91e7a; --pink-ink:#c2185b; --cyan:#0097a7; --cyan-bright:#00b8c9;
+  --orange:#e86a17; --map-bg:#0d1b2e; --chip:#eef2f5; --shadow:0 10px 30px rgba(20,32,46,.12);
+  --side-bg:#0c1425; --side-panel:#16223c; --side-panel2:#1d2c4c; --side-line:#263650;
+  --side-ink:#eef4f8; --side-muted:#93a9bd;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0b1220; --panel:#131e30; --panel2:#1a2942; --ink:#eef4f8; --muted:#a9bccb;
+  --line:#263650; --pink:#ff4d9a; --pink-ink:#ff7ab3; --cyan:#2dd4e6; --cyan-bright:#2dd4e6;
+  --orange:#ff9a4d; --chip:#1a2942; --shadow:0 10px 30px rgba(0,0,0,.4); }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+button,[role="button"],select,summary,input:not([type="checkbox"]){min-height:2.25rem}
+h1,h2,h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;margin:0}
+
+/* ===== App layout: sidebar + full map, IGN-style ===== */
+.app{display:grid;grid-template-columns:392px minmax(0,1fr);height:100dvh;min-height:620px;background:var(--map-bg)}
+.sidebar{background:var(--side-bg);color:var(--side-ink);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.side-hero{position:relative;line-height:0}
+.side-hero img{width:100%;height:132px;object-fit:cover;object-position:center 62%;display:block}
+.side-hero-veil{position:absolute;inset:0;line-height:1.25;padding:.8rem 1rem;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(transparent 18%,rgba(5,10,20,.88));color:#fff}
+.side-crumb{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9fd8e8;margin:0 0 .15rem}
+.side-hero-veil h1{font-size:1.9rem;font-weight:700;text-transform:uppercase;line-height:.95}
+.side-hero-veil h1 .neon{color:#ff5da2}
+.side-hero-veil p{margin:.25rem 0 0;font-size:.86rem;color:#d7e6ee;line-height:1.35}
+.side-body{padding:.9rem 1rem 1.2rem}
+.track-card{background:var(--side-panel);border:1px solid var(--side-line);border-radius:10px;padding:.65rem .8rem}
+.track-top{display:flex;justify-content:space-between;gap:1rem;font-size:.88rem;font-weight:700}
+.track-top span:last-child{color:var(--cyan-bright)}
+.bar{height:8px;background:#0a1220;border-radius:99px;margin-top:.45rem;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan-bright),var(--pink));transition:width .3s}
+.track-note{margin:.5rem 0 0;font-size:.8rem;color:var(--side-muted);line-height:1.4}
+.search{margin-top:.8rem;position:relative}
+.search input{width:100%;padding:.62rem .9rem .62rem 2.3rem;border:1px solid var(--side-line);border-radius:10px;background:#0a1220;color:#fff;font:inherit;font-size:1rem}
+.search input::placeholder{color:var(--side-muted)}
+.search svg{position:absolute;left:.65rem;top:50%;transform:translateY(-50%);opacity:.6;color:#fff}
+.quick-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-top:.7rem}
+.quick-actions button{background:var(--side-panel);border:1px solid var(--side-line);color:var(--side-ink);border-radius:10px;padding:.5rem .3rem;font:inherit;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.3rem;min-height:3.4rem}
+.quick-actions button svg{opacity:.85}
+.quick-actions button:hover{background:var(--side-panel2)}
+.quick-actions button.on,.quick-actions button[aria-pressed="true"]{border-color:var(--pink);color:#ffb9d6}
+.all-markers{margin-top:1rem;border-top:1px solid var(--side-line);padding-top:.8rem}
+.am-head{display:flex;justify-content:space-between;align-items:center}
+.am-head h2,.loc-head h2,.filters-box h2{font-size:1.02rem;text-transform:uppercase;letter-spacing:.08em}
+.showhide{background:none;border:none;color:var(--side-muted);font:inherit;font-size:.74rem;font-weight:700;letter-spacing:.1em;cursor:pointer;min-height:1.7rem;padding:.2rem .3rem}
+.showhide:hover{color:#fff}
+.am-row{display:flex;justify-content:space-between;align-items:center;padding:.42rem .1rem;color:var(--side-muted);font-size:.92rem}
+.am-row b{color:var(--side-ink);font-size:.95rem}
+.am-row .ok{color:var(--cyan-bright)}
+.loc-head{display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem;border-top:1px solid var(--side-line);padding-top:.8rem}
+.loc-head span{color:var(--side-muted);font-size:.82rem}
+.cat-sec{border-top:1px solid var(--side-line);padding:.55rem 0 .35rem}
+.cat-head{display:flex;justify-content:space-between;align-items:center}
+.cat-head h3{font-size:.92rem;text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:.45rem;font-family:'Barlow',sans-serif;font-weight:700}
+.cat-head .cnt{color:var(--side-muted);font-weight:600}
+.cat-rows{margin:.25rem 0 .3rem}
+.cat-empty{color:var(--side-muted);font-size:.86rem;margin:.3rem 0 .5rem}
+.loc-row{display:flex;gap:.55rem;align-items:center;width:100%;text-align:left;background:none;border:none;color:var(--side-ink);padding:.42rem .35rem;border-radius:8px;cursor:pointer;font:inherit;min-height:2.25rem}
+.loc-row:hover{background:var(--side-panel)}
+.loc-row.sel{background:var(--side-panel2)}
+.loc-row .n{width:1.45rem;height:1.45rem;border-radius:50%;color:#fff;font-size:.74rem;font-weight:700;display:grid;place-items:center;flex:none}
+.loc-row .tx{min-width:0}
+.loc-row .nm{font-weight:600;font-size:.93rem;display:block;line-height:1.15}
+.loc-row .zn{color:var(--side-muted);font-size:.76rem;display:block;line-height:1.2}
+.loc-row .done{color:var(--cyan-bright);margin-left:auto;font-weight:700}
+.filters-box{margin-top:1rem;border-top:1px solid var(--side-line);padding-top:.8rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.55rem}
+.chip{border:1px solid var(--side-line);background:var(--side-panel);color:var(--side-ink);border-radius:99px;padding:.45rem .85rem;font:inherit;font-weight:600;font-size:.9rem;cursor:pointer;min-height:2.25rem}
+.chip[aria-pressed="true"]{background:var(--pink);color:#fff;border-color:var(--pink)}
+
+/* ===== Stage / map ===== */
+.stage{position:relative;min-width:0;display:flex}
+.map-card{background:var(--map-bg);position:relative;flex:1;display:flex;flex-direction:column;overflow:hidden}
+.map-viewport{overflow:hidden;touch-action:none;cursor:grab;flex:1;position:relative}
+.map-viewport:active{cursor:grabbing}
+svg.map{width:100%;height:100%;display:block}
+.map-viewport{background:radial-gradient(120% 90% at 70% 30%,#164a6b 0%,#0d2f4e 48%,#081e36 100%)}
+.stage.terrain .land{fill:#4a6b2e}
+.stage.terrain .seaRect{fill:#14362e}
+.stage.terrain svg.map{filter:saturate(1.35) contrast(1.06)}
+.map-label{paint-order:stroke;stroke:rgba(8,24,18,.72);stroke-width:3.5px;stroke-linejoin:round}
+.map-label-light{paint-order:stroke;stroke:rgba(210,235,255,.28);stroke-width:3px;stroke-linejoin:round}
+.pin{cursor:pointer}
+.pin circle.core{stroke:#fff;stroke-width:2.2}
+.pin text{font-family:'Barlow';font-weight:700;fill:#fff;pointer-events:none;text-anchor:middle}
+.pin.dim{opacity:.12;pointer-events:none}
+.pin.active circle.core{stroke:#ffe45e;stroke-width:3.5}
+.pin.active circle.halo{fill:rgba(255,228,94,.35)}
+.zoom{position:absolute;top:.8rem;right:.8rem;display:flex;flex-direction:column;gap:.4rem;z-index:6}
+.zoom button{min-width:2.5rem;height:2.5rem;padding:0 .45rem;border-radius:9px;border:1px solid #33506e;background:rgba(18,36,58,.92);color:#fff;font-size:1.15rem;cursor:pointer;display:grid;place-items:center}
+.zoom button.lbl{font-size:.68rem;font-weight:700;letter-spacing:.04em;height:2.5rem}
+.zoom button[aria-pressed="true"]{border-color:var(--cyan-bright);color:var(--cyan-bright)}
+.detail{position:absolute;left:.9rem;bottom:.9rem;width:min(372px,calc(100% - 5.2rem));max-height:58%;overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem;box-shadow:var(--shadow);z-index:5;color:var(--ink)}
+.detail-close{position:absolute;top:.45rem;right:.45rem;width:2.1rem;height:2.1rem;min-height:2.1rem;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:1rem;cursor:pointer;line-height:1}
+.detail .badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem;padding-right:2.1rem}
+.badge{font-size:.78rem;font-weight:700;padding:.25rem .6rem;border-radius:99px;background:var(--panel2);border:1px solid var(--line)}
+.badge.status{color:var(--pink-ink);border-color:var(--pink)}
+.detail h2{font-size:1.75rem;line-height:1;text-transform:uppercase}
+.detail .region{color:var(--muted);font-weight:600;margin:.2rem 0 .6rem}
+.detail p{line-height:1.55;margin:.5rem 0}
+.detail dl{margin:.8rem 0 0;display:grid;gap:.55rem}
+.detail dt{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.detail dd{margin:.15rem 0 0;line-height:1.5}
+.explore-btn{width:100%;margin-top:1rem;padding:.7rem;border-radius:10px;border:2px solid var(--cyan);background:transparent;color:var(--ink);font:inherit;font-weight:700;cursor:pointer;min-height:2.75rem}
+.explore-btn.done{background:var(--cyan);color:#06222a}
+.map-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.5rem .9rem;background:#0a1626;flex-wrap:wrap}
+.map-note{color:#8fb0c4;font-size:.8rem;line-height:1.4;margin:0;flex:1;min-width:230px}
+.legend{display:flex;flex-wrap:wrap;gap:.8rem;color:#b9cfdd;font-size:.82rem}
+.legend span{display:inline-flex;align-items:center;gap:.35rem}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block;border:2px solid #fff;flex:none}
+
+/* ===== Below: full grid ===== */
+.below{max-width:1180px;margin:0 auto;padding:1rem}
+.list-head{display:flex;justify-content:space-between;align-items:baseline;margin:.6rem 0 .6rem;flex-wrap:wrap;gap:.5rem}
+.list-head h2{font-size:1.5rem;text-transform:uppercase}
+.list-head span{color:var(--muted);font-size:.92rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem}
+.card{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.85rem;cursor:pointer;font:inherit;color:var(--ink);display:block;width:100%}
+.card:hover{border-color:var(--cyan)}
+.card.sel{border-color:var(--pink);box-shadow:0 0 0 2px var(--pink) inset}
+.card .top{display:flex;justify-content:space-between;gap:.5rem;align-items:flex-start}
+.card h3{font-size:1.25rem;line-height:1.05;text-transform:uppercase}
+.card .num{font-weight:700;color:#fff;background:var(--pink);border-radius:50%;width:1.7rem;height:1.7rem;flex:none;display:grid;place-items:center;font-size:.9rem}
+.card p{margin:.45rem 0 0;color:var(--muted);font-size:.93rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .meta{margin-top:.55rem;display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.card .done-tag{color:var(--cyan);font-weight:700;font-size:.82rem}
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:1.4rem;text-align:center;color:var(--muted)}
+footer{max-width:1180px;margin:0 auto;padding:.5rem 1rem 2.2rem;color:var(--muted);font-size:.9rem;line-height:1.6}
+footer a{color:var(--cyan);display:inline-block;padding:.35rem 0}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media(max-width:900px){
+  .app{display:flex;flex-direction:column;height:auto;min-height:0}
+  .stage{order:-1;height:auto;min-height:0;flex:none}
+  .map-viewport{height:54dvh;min-height:340px;flex:none}
+  .sidebar{overflow:visible}
+  .detail{position:relative;left:auto;right:auto;bottom:auto;width:auto;max-height:330px;margin:.6rem}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-hero">
+      <img src="hero.webp" alt="Ilustración estilo póster retro de una ciudad tropical con hoteles art déco rosados y turquesa, palmeras y un atardecer sobre el mar">
+      <div class="side-hero-veil">
+        <p class="side-crumb">Grand Theft Auto VI · Guía del mapa</p>
+        <h1>Mapa de <span class="neon">Leonida</span></h1>
+        <p>Las 6 regiones oficiales de Rockstar y 81 lugares con nombre. Buscá, filtrá y tocá un marcador para ver su ficha.</p>
+      </div>
+    </div>
+    <div class="side-body">
+      <div class="track-card">
+        <div class="track-top"><span>Tu exploración</span><span id="progText">0 de 81</span></div>
+        <div class="bar" id="bar"><i id="barFill"></i></div>
+        <p class="track-note">Abrí la ficha de un lugar y marcalo como explorado para seguir tu progreso en esta visita.</p>
+      </div>
+
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="q" type="search" placeholder="Buscar marcador: playa, caimanes, aeropuerto…" aria-label="Buscar localización">
+      </div>
+
+      <div class="quick-actions">
+        <button id="qaExplored" aria-pressed="false">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Mis explorados</span>
+        </button>
+        <button id="qaRegions" aria-pressed="false">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Solo regiones</span>
+        </button>
+        <button id="qaReset">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          <span>Reiniciar</span>
+        </button>
+      </div>
+
+      <div class="all-markers">
+        <div class="am-head"><h2>Todos los marcadores</h2><button class="showhide" id="toggleAll" aria-label="Mostrar u ocultar todos los marcadores">HIDE</button></div>
+        <div class="am-row"><span><span class="ok">✓</span> Completados</span><b id="completeCount">0</b></div>
+        <div class="am-row"><span>◐ Por explorar</span><b id="incompleteCount">81</b></div>
+      </div>
+
+      <div class="loc-head"><h2>Ubicaciones</h2><span id="count"></span></div>
+      <div id="catSections"></div>
+
+      <div class="filters-box">
+        <h2>Filtros rápidos</h2>
+        <div class="chips" id="chips" role="group" aria-label="Filtrar por tipo"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="stage" id="stage">
+    <section class="map-card" aria-label="Mapa estilizado de Leonida">
+      <div class="map-viewport" id="viewport">
+        <svg class="map" viewBox="0 0 900 680" role="img" aria-label="Mapa estilizado de Leonida con pines de localizaciones">
+          <defs>
+            <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1a6a8a"/><stop offset=".38" stop-color="#14507c"/><stop offset=".72" stop-color="#0e3a5f"/><stop offset="1" stop-color="#08263f"/>
+            </linearGradient>
+            <radialGradient id="seaShallow" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#3ec6c0" stop-opacity=".55"/><stop offset=".72" stop-color="#2aa8b5" stop-opacity=".28"/><stop offset="1" stop-color="#2aa8b5" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#5d7f3a"/><stop offset=".28" stop-color="#4c7038"/><stop offset=".58" stop-color="#3d6b3f"/><stop offset=".82" stop-color="#2f6248"/><stop offset="1" stop-color="#2a5a44"/>
+            </linearGradient>
+            <linearGradient id="urbanGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#9aa0a3"/><stop offset=".55" stop-color="#8d8f96"/><stop offset="1" stop-color="#7d7f8a"/>
+            </linearGradient>
+            <pattern id="forestPat" width="18" height="18" patternUnits="userSpaceOnUse">
+              <circle cx="4" cy="5" r="3.2" fill="#244f2a" opacity=".55"/><circle cx="13" cy="12" r="3.8" fill="#1e4524" opacity=".6"/><circle cx="11" cy="3" r="2" fill="#356b33" opacity=".5"/>
+            </pattern>
+            <pattern id="swampPat" width="26" height="14" patternUnits="userSpaceOnUse">
+              <path d="M3 14 Q5 6 3 2 M9 14 Q11 7 13 3 M19 14 Q20 8 23 4" stroke="#1d4d33" stroke-width="1.6" fill="none" opacity=".65"/>
+            </pattern>
+            <pattern id="farmPat" width="34" height="22" patternUnits="userSpaceOnUse">
+              <rect width="34" height="22" fill="#7a8a3d"/><path d="M0 11 H34 M17 0 V22" stroke="#5d6e2e" stroke-width="2"/><path d="M0 0 H34" stroke="#c2b06a" stroke-width="1" opacity=".6"/>
+            </pattern>
+            <pattern id="sandPat" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="3" cy="4" r="1" fill="#c9a86a" opacity=".7"/><circle cx="9" cy="9" r="1" fill="#b9975a" opacity=".6"/>
+            </pattern>
+            <filter id="softBlur"><feGaussianBlur stdDeviation="6"/></filter>
+            <filter id="texNoise" x="0" y="0" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency=".012 .018" numOctaves="3" seed="7" result="n"/>
+              <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .16 0"/>
+              <feComposite operator="over" in2="SourceGraphic"/>
+            </filter>
+            <clipPath id="landClip"><path d="M118 78 L618 62 L668 96 L700 210 L742 300 L792 372 L806 452 L782 540 L706 584 L636 596 L560 566 L470 560 L360 540 L268 500 L206 442 L168 356 L150 268 L128 176 Z"/></clipPath>
+          </defs>
+          <g id="world">
+            <rect class="seaRect" x="-400" y="-300" width="1700" height="1300" fill="url(#sea)"/>
+            <!-- profundidad del agua: anillos claros cerca de la costa, oscuro mar adentro -->
+            <g opacity=".9">
+              <path d="M118 78 L618 62 L668 96 L700 210 L742 300 L792 372 L806 452 L782 540 L706 584 L636 596 L560 566 L470 560 L360 540 L268 500 L206 442 L168 356 L150 268 L128 176 Z" fill="none" stroke="#39b8b2" stroke-width="34" opacity=".18" filter="url(#softBlur)"/>
+              <path d="M118 78 L618 62 L668 96 L700 210 L742 300 L792 372 L806 452 L782 540 L706 584 L636 596 L560 566 L470 560 L360 540 L268 500 L206 442 L168 356 L150 268 L128 176 Z" fill="none" stroke="#7fe0d8" stroke-width="10" opacity=".28" filter="url(#softBlur)"/>
+              <ellipse cx="860" cy="120" rx="150" ry="210" fill="#061c30" opacity=".35" filter="url(#softBlur)"/>
+              <ellipse cx="40" cy="620" rx="190" ry="120" fill="#061c30" opacity=".3" filter="url(#softBlur)"/>
+              <path d="M60 120 Q240 90 420 118 T860 96" stroke="#8fd8e2" stroke-width="1.4" fill="none" opacity=".18"/><path d="M40 180 Q260 150 480 178 T880 160" stroke="#8fd8e2" stroke-width="1.2" fill="none" opacity=".12"/>
+            </g>
+            <text class="map-label-light" x="812" y="180" fill="#a8cfe2" font-size="17" font-weight="600" letter-spacing="3" transform="rotate(90 812 180)">OCÉANO ATLÁNTICO</text>
+            <text class="map-label-light" x="88" y="560" fill="#a8cfe2" font-size="17" font-weight="600" letter-spacing="3" transform="rotate(-90 88 560)">GOLFO DE LEONIDA</text>
+            <text class="map-label-light" x="430" y="652" fill="#8fc9cf" font-size="12" font-weight="600" letter-spacing="2">AGUAS DEL SUR · ESTRECHO DE LEONIDA</text>
+
+            <!-- tierra base -->
+            <path class="land" d="M118 78 L618 62 L668 96 L700 210 L742 300 L792 372 L806 452 L782 540 L706 584 L636 596 L560 566 L470 560 L360 540 L268 500 L206 442 L168 356 L150 268 L128 176 Z" fill="url(#landGrad)" stroke="#e6d49a" stroke-width="2.2"/>
+            <g clip-path="url(#landClip)">
+              <!-- relieve norte: Kalaga con sombreado de laderas y cotas -->
+              <g>
+                <ellipse cx="398" cy="118" rx="205" ry="62" fill="#6b8a42"/>
+                <ellipse cx="398" cy="112" rx="150" ry="44" fill="#7d9a4e"/>
+                <path d="M250 128 L330 82 L390 118 L450 78 L540 122 L470 132 L400 104 L320 136 Z" fill="#8aa85c" opacity=".8"/>
+                <path d="M285 122 L350 88 L385 116 L340 126 Z M415 118 L465 86 L510 120 L452 128 Z" fill="#2e4d22" opacity=".38"/>
+                <path d="M330 96 L398 128 L470 98" stroke="#e8e2b8" stroke-width="1.6" fill="none" opacity=".55"/>
+                <rect x="118" y="55" width="560" height="135" fill="url(#forestPat)"/>
+                <ellipse cx="398" cy="118" rx="190" ry="54" fill="none" stroke="#d8e6a0" stroke-width="1" opacity=".25"/><ellipse cx="398" cy="118" rx="130" ry="36" fill="none" stroke="#d8e6a0" stroke-width="1" opacity=".22"/>
+              </g>
+              <!-- llanura central y campos de Ambrosia -->
+              <g opacity=".92">
+                <rect x="385" y="205" width="210" height="150" fill="url(#farmPat)" transform="rotate(-4 490 280)"/>
+                <path d="M390 235 H590 M390 275 H600 M390 315 H585 M445 210 V350 M505 208 V352 M555 212 V345" stroke="#e3d189" stroke-width="1.2" opacity=".5"/>
+                <ellipse cx="480" cy="300" rx="118" ry="84" fill="#a8894a" opacity=".22"/>
+              </g>
+              <!-- humedal / Grassrivers con canales -->
+              <g>
+                <ellipse cx="545" cy="478" rx="135" ry="78" fill="#2b6b52"/>
+                <rect x="395" y="395" width="300" height="165" fill="url(#swampPat)"/>
+                <path d="M420 455 Q500 430 560 470 T690 500 M400 500 Q490 485 570 515 T675 535 M455 420 Q540 445 620 430" stroke="#3fa7a0" stroke-width="5" fill="none" opacity=".75" stroke-linecap="round"/>
+                <path d="M470 445 Q520 500 500 545 M590 440 Q600 495 640 530" stroke="#3fa7a0" stroke-width="3.5" fill="none" opacity=".6"/>
+                <ellipse cx="502" cy="498" rx="30" ry="13" fill="#2f7f96"/><ellipse cx="548" cy="472" rx="20" ry="9" fill="#2f7f96" opacity=".85"/>
+              </g>
+              <!-- costa oeste decadente / Port Gellhorn -->
+              <ellipse cx="212" cy="352" rx="68" ry="92" fill="#8a7a56" opacity=".55"/>
+              <rect x="150" y="265" width="125" height="175" fill="url(#sandPat)" opacity=".7"/>
+              <!-- zona urbana Vice City: mancha urbana + islas de la bahía -->
+              <g>
+                <path d="M640 285 L712 278 L770 305 L800 360 L812 450 L788 545 L710 585 L650 545 L628 430 L632 340 Z" fill="url(#urbanGrad)" opacity=".96"/>
+                <path d="M640 285 L712 278 L770 305 L800 360 L812 450 L788 545 L710 585 L650 545 L628 430 L632 340 Z" fill="none" stroke="#d8d2c4" stroke-width="1.4" opacity=".7"/>
+                <ellipse cx="735" cy="355" rx="20" ry="9" fill="#8f9299" transform="rotate(-18 735 355)"/><ellipse cx="760" cy="335" rx="16" ry="7" fill="#8f9299" transform="rotate(-12 760 335)"/><ellipse cx="730" cy="478" rx="18" ry="8" fill="#969aa0" transform="rotate(14 730 478)"/>
+                <g stroke="#f2ead2" stroke-width="1.15" opacity=".62">
+                  <path d="M650 305 L798 296 M645 332 L806 324 M642 360 L810 354 M640 388 L812 384 M640 416 L814 414 M642 444 L812 444 M646 472 L802 478 M654 500 L788 510 M664 528 L764 540"/>
+                  <path d="M668 292 L660 560 M696 288 L692 572 M724 284 L726 580 M752 292 L760 568 M780 306 L788 548"/>
+                  <path d="M660 375 L730 478 M700 300 L770 430 M645 460 L745 360" stroke-width=".9"/>
+                </g>
+                <g fill="#e9e4d6" opacity=".5"><rect x="700" y="365" width="16" height="11"/><rect x="735" y="405" width="18" height="12"/><rect x="678" y="435" width="15" height="10"/><rect x="755" y="465" width="16" height="11"/><rect x="705" y="495" width="14" height="10"/></g>
+              </g>
+              <!-- lagos y ríos -->
+              <path d="M452 238 Q505 218 558 238 Q570 262 538 276 Q485 288 455 268 Q442 252 452 238 Z" fill="#2f7fb8" stroke="#9fd0e8" stroke-width="1.4"/>
+              <ellipse cx="505" cy="108" rx="28" ry="11" fill="#2f7fb8" opacity=".9"/>
+              <path d="M342 282 Q395 300 430 340 T478 430" stroke="#3a90b8" stroke-width="4" fill="none" opacity=".85" stroke-linecap="round"/>
+              <path d="M262 202 Q300 245 342 282" stroke="#3a90b8" stroke-width="3" fill="none" opacity=".7"/>
+              <path d="M478 522 Q520 500 560 540" stroke="#3a90b8" stroke-width="3" fill="none" opacity=".7"/>
+              <!-- playas -->
+              <path d="M700 210 L742 300 L792 372 L806 452 L782 540" stroke="#ecd9a0" stroke-width="10" fill="none" opacity=".85" stroke-linecap="round"/>
+              <path d="M150 268 L168 356 L206 442" stroke="#ecd9a0" stroke-width="7" fill="none" opacity=".55"/>
+              <!-- textura general del terreno -->
+              <rect x="110" y="55" width="710" height="550" fill="transparent" filter="url(#texNoise)" opacity=".55"/>
+            </g>
+            <path d="M118 78 L618 62 L668 96 L700 210 L742 300 L792 372 L806 452 L782 540 L706 584 L636 596 L560 566 L470 560 L360 540 L268 500 L206 442 L168 356 L150 268 L128 176 Z" fill="none" stroke="#f0e2ae" stroke-width="1.2" opacity=".8"/>
+
+            <!-- red vial densa: carcasa + calzada -->
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <g stroke="#17251c" stroke-width="5.2" opacity=".42">
+                <path d="M198 352 C330 332 480 312 640 378 C695 400 730 418 754 434"/><path d="M398 118 C425 215 468 305 538 458 C568 528 600 568 642 594"/><path d="M478 300 C560 338 655 388 750 432"/><path d="M212 352 C300 298 385 258 472 250"/><path d="M150 292 C300 198 485 138 642 98"/><path d="M360 180 C430 200 520 195 600 250 C650 285 690 320 720 360"/><path d="M268 500 C360 460 430 430 540 470 C610 495 660 520 700 545"/><path d="M585 585 C580 600 582 608 585 618"/>
+              </g>
+              <g stroke="#f6d67c" stroke-width="2.7">
+                <path d="M198 352 C330 332 480 312 640 378 C695 400 730 418 754 434"/><path d="M398 118 C425 215 468 305 538 458 C568 528 600 568 642 594"/><path d="M478 300 C560 338 655 388 750 432"/><path d="M212 352 C300 298 385 258 472 250"/><path d="M150 292 C300 198 485 138 642 98"/>
+              </g>
+              <g stroke="#e8e2cf" stroke-width="1.7" opacity=".9">
+                <path d="M360 180 C430 200 520 195 600 250 C650 285 690 320 720 360"/><path d="M268 500 C360 460 430 430 540 470 C610 495 660 520 700 545"/><path d="M300 140 C360 230 390 330 420 430"/><path d="M560 198 C580 280 600 360 640 440"/><path d="M238 392 C340 380 450 375 560 395"/><path d="M320 478 C380 400 430 340 505 252"/>
+              </g>
+              <g stroke="#ffffff" stroke-width="1.9" opacity=".95"><path d="M650 545 C630 575 605 600 585 618"/></g>
+              <!-- escudos de autopista -->
+              <g font-family="Barlow" font-weight="700" font-size="9" text-anchor="middle"><rect x="438" y="322" width="26" height="15" rx="4" fill="#123a6b" stroke="#fff"/><text x="451" y="333" fill="#fff">I-97</text><rect x="618" y="386" width="26" height="15" rx="4" fill="#123a6b" stroke="#fff"/><text x="631" y="397" fill="#fff">A1A</text><rect x="282" y="332" width="26" height="15" rx="4" fill="#5b1f2a" stroke="#fff"/><text x="295" y="343" fill="#fff">US-41</text></g>
+            </g>
+
+            <!-- Leonida Keys: islas con forma + carretera sobre puentes -->
+            <g>
+              <path d="M585 585 C580 600 582 608 585 618" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/>
+              <g fill="#3d7a4e" stroke="#ecd9a0" stroke-width="1.6">
+                <path d="M496 618 Q520 608 544 618 Q540 630 518 630 Q498 629 496 618 Z"/><path d="M544 626 Q566 618 588 627 Q584 640 564 640 Q546 638 544 626 Z"/><path d="M590 624 Q612 616 634 625 Q630 638 610 638 Q592 636 590 624 Z"/><path d="M632 612 Q654 604 676 613 Q672 626 652 626 Q634 624 632 612 Z"/>
+              </g>
+              <path d="M500 622 Q585 636 672 616" stroke="#f6d67c" stroke-width="2.2" fill="none"/>
+              <g fill="#2b6b52"><ellipse cx="214" cy="92" rx="17" ry="7"/><ellipse cx="562" cy="92" rx="20" ry="7"/><ellipse cx="802" cy="338" rx="13" ry="6"/><ellipse cx="148" cy="382" rx="12" ry="6"/></g>
+            </g>
+
+            <!-- rosa de los vientos -->
+            <g transform="translate(852,52)" opacity=".9"><circle r="19" fill="rgba(6,24,40,.72)" stroke="#9fd8e8" stroke-width="1"/><path d="M0 -15 L4 0 L0 15 L-4 0 Z" fill="#ff5da2"/><path d="M-15 0 L0 -4 L15 0 L0 4 Z" fill="#d9ecf5"/><text y="-24" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">N</text></g>
+
+            <g font-family="Barlow Condensed" font-weight="600" letter-spacing="2">
+              <text class="map-label" x="318" y="102" font-size="19" fill="#eef7d8">MOUNT KALAGA N.P.</text>
+              <text class="map-label" x="428" y="292" font-size="19" fill="#fff3c4">AMBROSIA</text>
+              <text class="map-label" x="458" y="246" font-size="12" fill="#cfeeff" letter-spacing="1">LAGO LEONIDA</text>
+              <text class="map-label" x="452" y="482" font-size="19" fill="#d8f5df">GRASSRIVERS</text>
+              <text class="map-label" x="138" y="302" font-size="17" fill="#f7e8c8">PORT</text>
+              <text class="map-label" x="138" y="322" font-size="17" fill="#f7e8c8">GELLHORN</text>
+              <text class="map-label" x="682" y="352" font-size="22" fill="#ffd3e8">VICE CITY</text>
+              <text class="map-label" x="505" y="662" font-size="15" fill="#e6f7e8">LEONIDA KEYS</text>
+              <text class="map-label" x="545" y="130" font-size="10" fill="#dbeecf" letter-spacing="1">LAGO TALLALOKO</text>
+              <text class="map-label" x="300" y="272" font-size="10" fill="#cfeeff" letter-spacing="1" transform="rotate(38 300 272)">RÍO EMERALD</text>
+            </g>
+            <g id="pins"></g>
+          </g>
+        </svg>
+      </div>
+      <div class="zoom">
+        <button id="zIn" aria-label="Acercar">+</button>
+        <button id="zOut" aria-label="Alejar">−</button>
+        <button id="zReset" aria-label="Restablecer vista" class="lbl">RESET</button>
+        <button id="layerBtn" aria-pressed="false" class="lbl" aria-label="Cambiar estilo del mapa a terreno">TERRENO</button>
+      </div>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+      <div class="map-foot">
+        <p class="map-note">Mapa original de fans con terreno detallado — relieve en Mount Kalaga, campos de Ambrosia, canales de Grassrivers, trama urbana de Vice City, playas, ríos, lagos y red vial con autopistas y la carretera de los Keys — no es el mapa oficial de Rockstar: las posiciones son aproximadas según la geografía de Florida que inspira a Leonida y el material oficial publicado. Arrastrá para moverte, usá la rueda del mouse o + / − para acercar, y el botón TERRENO para verlo en modo saturado.</p>
+        <div class="legend" id="legend"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="below">
+  <div class="list-head"><h2>Localizaciones confirmadas y vistas hasta ahora</h2></div>
+  <p style="color:var(--muted);margin:.2rem 0 .8rem;line-height:1.5">Selección de 81 lugares con nombre: las 6 regiones de Rockstar más los barrios, islas, pueblos y puntos impresos en el mapa oficial publicado tras el lanzamiento y nombrados en tráileres y material oficial. Es una selección, no la lista total del juego: el mapa completo tiene cientos de puntos menores.</p>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>Ningún lugar coincide con ese filtro. Probá con “playa”, “Vice” o quitá el filtro.</div>
+</div>
+
+<footer>
+  <p><strong>Sobre las fuentes:</strong> las 6 regiones principales (Vice City, Leonida Keys, Grassrivers, Port Gellhorn, Ambrosia y Mount Kalaga National Park) son las que Rockstar presenta oficialmente para el estado de Leonida. Los lugares marcados como “En el mapa oficial” llevan el nombre impreso en el mapa oficial de Leonida publicado tras el lanzamiento; los marcados como “visto en tráileres” o “material oficial” salen de los tráileres y las descripciones de ediciones. Este mapa es una versión estilizada: las posiciones de los pines son aproximadas.</p>
+  <p>Fuentes: <a href="https://www.gamesradar.com/games/grand-theft-auto/gta-6-locations/" target="_blank" rel="noopener">GamesRadar — Every GTA 6 location revealed so far</a> · <a href="https://insider-gaming.com/every-gta-6-location-confirmed-so-far-vice-city-included-more/" target="_blank" rel="noopener">Insider Gaming — Every GTA 6 Location Confirmed So Far</a> · <a href="https://insider-gaming.com/gta-6-map-location-poi/" target="_blank" rel="noopener">Insider Gaming — Complete GTA 6 Map: Every Location and POI</a> · <a href="https://games.gg/grand-theft-auto-vi/guides/grand-theft-auto-6-locations-every-location-revealed-so-far/" target="_blank" rel="noopener">games.gg — GTA 6: All Locations Revealed So Far</a></p>
+  <p>Página de fans sin afiliación con Rockstar Games ni Take-Two Interactive. Grand Theft Auto y GTA son marcas de sus respectivos dueños. Ilustración de portada: póster original estilo retro, no es arte oficial del juego.</p>
+</footer>
+
+<script>
+var CATS = {
+  region:{label:"Regiones principales", color:"#ff2e88"},
+  barrio:{label:"Barrios y pueblos", color:"#ffb02e"},
+  naturaleza:{label:"Naturaleza", color:"#3ecf6e"},
+  costa:{label:"Costa e islas", color:"#2ec5d4"},
+  poi:{label:"Puntos de interés", color:"#c792ff"}
+};
+var LOCS = [
+ {n:"Vice City",cat:"region",x:758,y:428,zone:"Vice-Dale · costa este",status:"Confirmado por Rockstar",desc:"El glamour, el ajetreo y la codicia de América en una sola ciudad. La capital del sol y la fiesta de Leonida: rascacielos frente al mar, vida nocturna de neón, autopistas llenas y barrios donde cada cuadra tiene su propio negocio, legal o no.",real:"Miami, Florida",tip:"Es el centro del mapa y el punto de partida de Lucía tras salir de la prisión estatal."},
+ {n:"Leonida Keys",cat:"region",x:585,y:618,zone:"Extremo sur del estado",status:"Confirmado por Rockstar",desc:"Un archipiélago tropical presentado como la “puerta al paraíso”: aguas turquesa ideales para navegar… y de las más peligrosas de América. Muelles, marinas y casas sobre el agua conectadas por puentes larguísimos.",real:"Los Cayos de Florida (Florida Keys)",tip:"Zona de Jason: vive y trabaja por aquí, entre barcos y encargos de contrabando."},
+ {n:"Grassrivers",cat:"region",x:545,y:478,zone:"Suroeste interior",status:"Confirmado por Rockstar",desc:"La extensión primordial de pantanos y manglares de Leonida. Los caimanes son solo el depredador más famoso: entre la hierba alta y los canales hay cosas peores. Casas sobre pilotes, hidrodeslizadores y cazadores furtivos.",real:"Los Everglades, Florida",tip:"Terreno ideal para hidrodeslizador (airboat) y para perder a la policía entre manglares."},
+ {n:"Port Gellhorn",cat:"region",x:198,y:352,zone:"Costa del Golfo",status:"Confirmado por Rockstar",desc:"La costa olvidada de Leonida. Lo que fue un destino turístico hoy es una hilera de moteles baratos, centros comerciales vacíos y clubes de mala muerte: cuando los turistas se fueron, otra cosa se mudó en su lugar.",real:"Pueblos costeros en declive del Golfo de Florida",tip:"Ambiente más oscuro y decadente que Vice City; Rockstar lo presenta como zona de moteles y strip malls abandonados."},
+ {n:"Ambrosia",cat:"region",x:478,y:298,zone:"Corazón de Leonida",status:"Confirmado por Rockstar",desc:"El centro industrial del estado: una enorme refinería de azúcar domina el pueblo y da trabajo a casi todos, mientras una banda de motociclistas controla buena parte de lo demás. Polvo, caña y motores.",real:"El interior azucarero de Florida, junto al lago Okeechobee",tip:"Aquí manda la refinería Allied Crystal y la banda de bikers local."},
+ {n:"Mount Kalaga National Park",cat:"region",x:398,y:118,zone:"Frontera norte del estado",status:"Confirmado por Rockstar",desc:"Un parque nacional y emblema natural pegado a la frontera norte de Leonida: bosques, ríos, senderos y vida salvaje — linces, ciervos y coyotes — lejos de todo el neón. El rincón para cazar, pescar y desconectarse de la red.",real:"Bosques y parques del norte de Florida",tip:"La zona más salvaje del mapa: off-road, caza y pesca lejos de la ciudad."},
+ {n:"Ocean Beach",cat:"barrio",x:815,y:452,zone:"Vice City",status:"Confirmado por Rockstar",desc:"Arenas blancas y brillantes frente a hoteles art déco de colores pastel. El barrio más icónico de Vice City desde los años 80, ahora con turistas, influencers y negocios de fachada.",real:"Ocean Drive / South Beach, Miami",tip:"La postal clásica: caminá la franja de hoteles al atardecer."},
+ {n:"Little Cuba",cat:"barrio",x:718,y:438,zone:"Vice City",status:"Confirmado por Rockstar",desc:"El barrio cubano de Vice City: panaderías concurridas, cafecitos, dominó en la acera y carteles en español. Color, ruido y comunidad en pocas cuadras.",real:"La Pequeña Habana (Little Havana), Miami",tip:"Rockstar lo destaca por sus panaderías y su vida de barrio."},
+ {n:"Downtown Vice City",cat:"barrio",x:748,y:392,zone:"Vice City",status:"Visto en tráileres",desc:"El centro financiero y de rascacielos: torres de condominios, oficinas, puentes iluminados y el skyline que se ve desde los Keys. De día negocios, de noche otra cosa.",real:"Downtown / Brickell, Miami",tip:"El skyline que se distingue al fondo en las tomas de los Leonida Keys."},
+ {n:"Stockyard",cat:"barrio",x:642,y:382,zone:"Oeste de Vice City",status:"Visto en tráileres",desc:"Distrito de almacenes, patios de carga y vida de barrio trabajador al oeste de la ciudad, mencionado en el material oficial de ediciones del juego.",real:"Barrios industriales del interior de Miami",tip:"Nombre confirmado en material oficial; su papel exacto se conoce al jugar."},
+ {n:"Washington Beach",cat:"costa",x:805,y:492,zone:"Vice City",status:"Visto en material oficial",desc:"Playa y marina al sur de Ocean Beach donde el material oficial ubica embarcaciones de las ediciones especiales. Ambiente playero más residencial que la franja turística.",real:"Washington Avenue / zona sur de Miami Beach",tip:"Punto de amarre mencionado para la lancha Shitzu Squalo de la Ultimate Edition."},
+ {n:"Vice Beach",cat:"costa",x:828,y:418,zone:"Vice City · isla barrera",status:"Visto en tráileres",desc:"La isla barrera frente a la ciudad: la franja completa de playa, hoteles y paseo marítimo que separa Vice City del Atlántico.",real:"Miami Beach",tip:"La costa que se recorre de Ocean Beach hacia el norte sin salir de la arena."},
+ {n:"Starfish Island",cat:"costa",x:732,y:478,zone:"Bahía de Vice City",status:"Visto en tráileres",desc:"La isla de las mansiones en plena bahía: casas enormes con muelle privado, vecinas de narcos, estrellas y millonarios retirados.",real:"Star Island, Miami",tip:"Un clásico que regresa de los GTA de Vice City originales."},
+ {n:"Watson Bay",cat:"costa",x:672,y:528,zone:"Sur de Vice City",status:"Visto en material oficial",desc:"Bahía al sur de la ciudad mencionada en el material oficial como sede del Paradise Garage. Zona de talleres, marinas y canales.",real:"Bahías y canales del sur de Miami",tip:"El material oficial ubica aquí el Paradise Garage."},
+ {n:"Tisha-Wocka Flea Market",cat:"poi",x:692,y:408,zone:"Vice City",status:"Confirmado por Rockstar",desc:"El mercado de pulgas más famoso de Leonida: marcas “de imitación”, gangas imposibles y de todo un poco bajo los toldos. Si se vende en la calle en Vice City, primero pasó por aquí.",real:"Los flea markets gigantes del sur de Florida",tip:"Rockstar lo cita como el lugar de las marcas pirata de la ciudad."},
+ {n:"VC Port · Port Vice City",cat:"poi",x:768,y:512,zone:"Vice City",status:"Confirmado por Rockstar",desc:"El puerto de Vice City, autoproclamada capital mundial de los cruceros: barcos gigantes, contenedores, grúas y todo lo que entra y sale del estado… declarado o no.",real:"PortMiami, el puerto de cruceros de Miami",tip:"Zona de muelles perfecta para persecuciones entre contenedores."},
+ {n:"Aeropuerto Internacional VCIA",cat:"poi",x:668,y:462,zone:"Oeste de Vice City",status:"Visto en tráileres",desc:"El aeropuerto internacional de Vice City, puerta de entrada de turistas, dinero y mercancía a Leonida. Pistas, terminales y hangares al oeste de la ciudad.",real:"Aeropuerto Internacional de Miami (MIA)",tip:"En los GTA clásicos era Escobar International; ahora responde a las siglas VCIA."},
+ {n:"Leaf Links Golf Club",cat:"poi",x:795,y:368,zone:"Isla frente a Vice City",status:"Visto en tráileres",desc:"El club de golf sobre su propia isla, con palmeras y vistas al skyline. Un guiño directo al campo de golf del Vice City de 2002.",real:"Campos de golf insulares de Miami Beach",tip:"Otro regreso clásico: golf con el centro de la ciudad de fondo."},
+ {n:"Lago Leonida",cat:"naturaleza",x:505,y:252,zone:"Centro del estado",status:"Visto en material oficial",desc:"El gran lago interior de Leonida, junto a Ambrosia. El material oficial lo menciona como zona de tiendas off-road y vida rural a orillas del agua.",real:"Lago Okeechobee, Florida",tip:"Aquí el material oficial ubica la tienda off-road One-Eyed Willie's."},
+ {n:"Refinería Allied Crystal",cat:"poi",x:492,y:322,zone:"Ambrosia",status:"Visto en tráileres",desc:"La refinería de azúcar que domina Ambrosia: chimeneas, silos y campos de caña hasta el horizonte. Quien controla la refinería, controla el pueblo.",real:"Las azucareras del interior de Florida",tip:"El corazón industrial de Ambrosia y centro de poder local."},
+ {n:"Thrillbilly Mud Club",cat:"poi",x:238,y:392,zone:"Cerca de Port Gellhorn",status:"Visto en tráileres",desc:"Club de lodo y todoterrenos de la costa del Golfo: pistas de barro, pickups levantadas y competencias donde terminar limpio es perder.",real:"La cultura mud-bogging del sur de EE. UU.",tip:"Nombre visto en cartelería de los tráileres, en la zona de Gellhorn."},
+ {n:"Grayson",cat:"barrio",x:360,y:180,zone:"Norte de Leonida",status:"Visto en el mapa y tráileres",desc:"Uno de los pueblos del norte rural, camino a Mount Kalaga: calles tranquilas, granjas y bosque cada vez más cerca.",real:"Pueblos rurales del norte de Florida",tip:"Parada natural en la ruta hacia el parque nacional."},
+ {n:"Waning Sands",cat:"naturaleza",x:320,y:478,zone:"Suroeste, junto a Grassrivers",status:"Visto en el mapa y tráileres",desc:"Terreno de arenas y marismas donde el pantano de Grassrivers se abre hacia la costa: cabañas sobre pilotes y canales sin nombre.",real:"La costa de los Everglades",tip:"La transición entre el pantano y el Golfo."},
+ {n:"Prisión Estatal de Leonida",cat:"poi",x:430,y:340,zone:"Interior del estado",status:"Visto en tráileres",desc:"El correccional estatal del que sale Lucía Caminos al inicio de la historia, con su uniforme naranja ya icónico del primer tráiler.",real:"—",tip:"El punto de arranque de la historia de Lucía y Jason."},
+ {n:"Southside Vice City",cat:"barrio",x:735,y:502,zone:"Vice City · sur",status:"Confirmado por Rockstar",desc:"El sur de Vice City: barrios residenciales y el complejo de la banda PTT Youngin$, mencionado en el material oficial de las ediciones del juego.",real:"Barrios del sur de Miami",tip:"Aquí el material oficial ubica el PTT Youngin$ Compound."},
+ {n:"Rialto Islands",cat:"costa",x:768,y:338,zone:"Vice-Dale · bahía norte",status:"En el mapa oficial",desc:"Grupo de islas residenciales en la bahía, al norte de Vice City, conectadas por puentes y calzadas.",real:"Islas residenciales de la bahía de Miami",tip:"Aparecen como grupo insular en el mapa oficial de Leonida."},
+ {n:"Venetian Islands",cat:"costa",x:743,y:352,zone:"Vice-Dale · bahía",status:"Visto en tráileres",desc:"Cadena de islas residenciales entre Downtown y Vice Beach, con casas frente al agua y puentes levadizos.",real:"Venetian Islands, Miami",tip:"Se distinguen en las tomas aéreas de la bahía."},
+ {n:"Peacock Bay",cat:"costa",x:698,y:548,zone:"Sur de Vice-Dale",status:"En el mapa oficial",desc:"Bahía al sur de Vice City, rodeada de manglares y zonas residenciales con canales.",real:"Bahías del sur de Miami",tip:"En el mapa oficial figura junto a Peacock Estates."},
+ {n:"Bayside",cat:"barrio",x:688,y:358,zone:"Vice City · lado de la bahía",status:"Visto en material oficial",desc:"Zona de Vice City del lado de la bahía: marinas, paseos frente al agua y edificios bajos.",real:"Bayside, Miami",tip:"Nombre visto en el material promocional del juego."},
+ {n:"Rockridge",cat:"barrio",x:622,y:408,zone:"Oeste de Vice-Dale",status:"En el mapa oficial",desc:"Barrio interior al oeste de Vice City, de calles residenciales y comercios locales.",real:"Barrios interiores de Miami-Dade",tip:"Figura en el mapa oficial entre Stockyard y la costa sur."},
+ {n:"Crosstown",cat:"barrio",x:700,y:428,zone:"Vice City",status:"En el mapa oficial",desc:"Distrito de paso en pleno Vice City, cruzado por avenidas y vías elevadas.",real:"Distritos centrales de Miami",tip:"Su nombre sale impreso en el mapa oficial."},
+ {n:"La Perle",cat:"barrio",x:762,y:404,zone:"Vice City · centro",status:"En el mapa oficial",desc:"Barrio céntrico de Vice City que aparece rotulado en el mapa oficial, junto a Downtown.",real:"—",tip:"Posición aproximada según el mapa oficial publicado."},
+ {n:"Decor District",cat:"barrio",x:782,y:432,zone:"Vice City · costa",status:"En el mapa oficial",desc:"Distrito costero de Vice City nombrado en el mapa oficial, en la franja de la isla barrera.",real:"Distrito art déco de Miami Beach",tip:"Su nombre juega con el déco de Ocean Beach."},
+ {n:"Tequesta",cat:"barrio",x:638,y:498,zone:"Suroeste de Vice-Dale",status:"En el mapa oficial",desc:"Área residencial del suroeste del condado, entre la ciudad y los canales del sur.",real:"Pueblos del suroeste de Miami-Dade",tip:"En el mapa oficial aparece junto a Tequesta Retreat."},
+ {n:"Tequesta Retreat",cat:"poi",x:612,y:522,zone:"Suroeste de Vice-Dale",status:"Visto en material oficial",desc:"Retiro y zona de descanso al suroeste de Vice City, citada en el material oficial.",real:"—",tip:"Uno de los nombres menores revelados antes del lanzamiento."},
+ {n:"Catalan Island",cat:"costa",x:802,y:338,zone:"Vice-Dale · Atlántico",status:"En el mapa oficial",desc:"Isla frente a la costa este de Vice City, en la cadena de islas de la bahía y el Atlántico.",real:"Islas de Miami Beach",tip:"Figura en el mapa oficial junto a Catalan Bay y Catalan Key."},
+ {n:"Casanova Island",cat:"costa",x:786,y:318,zone:"Vice-Dale · bahía norte",status:"En el mapa oficial",desc:"Isla residencial al norte de la bahía de Vice City, de las que rodean Leaf Links.",real:"Islas residenciales de Miami",tip:"Nombre impreso en el mapa oficial de Leonida."},
+ {n:"Washington Island",cat:"costa",x:788,y:472,zone:"Vice City · isla barrera",status:"En el mapa oficial",desc:"La isla de la franja de Washington Beach: hoteles, playa y marina en la isla barrera.",real:"Miami Beach sur",tip:"En el mapa oficial se distingue de Washington Beach, que es la playa."},
+ {n:"Penmarch Isle",cat:"costa",x:714,y:330,zone:"Vice-Dale · bahía norte",status:"En el mapa oficial",desc:"Pequeña isla al norte de la bahía de Vice City, en el rosario de islas residenciales.",real:"Islas de la bahía de Biscayne",tip:"Aparece rotulada en el mapa oficial."},
+ {n:"Salton",cat:"barrio",x:634,y:446,zone:"Vice-Dale interior",status:"En el mapa oficial",desc:"Zona interior de Vice-Dale entre el aeropuerto y la bahía, nombrada en el mapa oficial.",real:"—",tip:"Junto a Salton Memorial Island, en la bahía."},
+ {n:"Belville",cat:"barrio",x:560,y:198,zone:"Leonard County · norte",status:"En el mapa oficial",desc:"Pueblo del condado de Leonard, en la ruta entre el Lago Leonida y la costa este.",real:"Pueblos del centro de Florida",tip:"Figura en el mapa oficial al norte de Waning Sands."},
+ {n:"Cellerica",cat:"barrio",x:582,y:282,zone:"Leonard County",status:"En el mapa oficial",desc:"Pequeña localidad de Leonard County, vecina del Chateau Cellerica y del Lago Leonida.",real:"—",tip:"Nombre impreso en el mapa oficial."},
+ {n:"Sabal Palms",cat:"barrio",x:602,y:322,zone:"Leonard County · este",status:"En el mapa oficial",desc:"Zona de palmeras y viviendas al este de Leonard County, camino a la costa.",real:"—",tip:"Su nombre hace referencia a la palma sabal, típica de Florida."},
+ {n:"Vinewood Beach",cat:"costa",x:736,y:282,zone:"Costa este · Leonard County",status:"En el mapa oficial",desc:"Playa de la costa este al norte de Vice City, en el tramo de Leonard County.",real:"Playas del Atlántico de Florida",tip:"Aparece en el mapa oficial sobre la costa este. No confundir con Vinewood de Los Santos."},
+ {n:"Richard Barebone State Park",cat:"naturaleza",x:428,y:202,zone:"Leonard County · interior",status:"En el mapa oficial",desc:"Parque estatal de bosque y senderos en el interior, entre Mount Kalaga y el Lago Leonida.",real:"Parques estatales de Florida",tip:"Figura en el mapa oficial como parque estatal."},
+ {n:"Mount Hailes Country Club",cat:"poi",x:522,y:178,zone:"Leonard County · norte",status:"En el mapa oficial",desc:"Club de campo con golf al norte de Leonard County, en zona de lagos y bosque.",real:"Clubes de golf de Florida",tip:"Nombre impreso en el mapa oficial."},
+ {n:"Bonanza",cat:"barrio",x:300,y:140,zone:"Lummox County · norte",status:"En el mapa oficial",desc:"Pueblo rural del condado de Lummox, en el extremo norte de Leonida, rodeado de bosque.",real:"Pueblos del norte de Florida",tip:"Uno de los pueblos del norte en el mapa oficial."},
+ {n:"Millport",cat:"barrio",x:482,y:142,zone:"Lummox County · norte",status:"En el mapa oficial",desc:"Localidad del norte junto a su cuenca y al Lago Tallaloko, en Lummox County.",real:"—",tip:"En el mapa oficial aparece con Millport Basin."},
+ {n:"Moreau",cat:"barrio",x:262,y:202,zone:"Lummox County · oeste",status:"En el mapa oficial",desc:"Pueblo del oeste de Lummox County, junto al río Moreau y los bosques del norte.",real:"—",tip:"El río Moreau lleva su nombre en el mapa oficial."},
+ {n:"Hyde Island",cat:"costa",x:214,y:92,zone:"Costa norte · Lummox",status:"En el mapa oficial",desc:"Isla frente a la costa norte de Leonida, en el grupo de islas de Lummox County.",real:"Islas de la costa norte de Florida",tip:"Posición aproximada: está mar adentro, al norte del parque Kalaga."},
+ {n:"Frampton Islands",cat:"costa",x:562,y:92,zone:"Costa norte · Lummox",status:"En el mapa oficial",desc:"Archipiélago frente a la costa norte del estado, en aguas de Lummox County.",real:"—",tip:"Grupo insular rotulado en el mapa oficial."},
+ {n:"MacAlister Gold Mine",cat:"poi",x:442,y:92,zone:"Lummox County · norte",status:"En el mapa oficial",desc:"Una mina de oro en pleno norte rural de Leonida: veta histórica entre los bosques de Lummox.",real:"—",tip:"Punto de interés impreso en el mapa oficial."},
+ {n:"Lago Tallaloko",cat:"naturaleza",x:505,y:108,zone:"Lummox County · norte",status:"En el mapa oficial",desc:"Lago del norte de Leonida con resort a sus orillas, en el corazón de Lummox County.",real:"Lagos del norte de Florida",tip:"En el mapa oficial figura como Lake Tallaloko, junto al Tallaloke Lakeside Resort."},
+ {n:"Tallaloke Lakeside Resort",cat:"poi",x:528,y:126,zone:"Lummox County · norte",status:"En el mapa oficial",desc:"Resort junto al lago en el norte del estado: cabañas, muelle y turismo de bosque.",real:"Resorts lacustres de Florida",tip:"Nombre impreso en el mapa oficial."},
+ {n:"Capri",cat:"barrio",x:262,y:300,zone:"Kelly County · interior",status:"En el mapa oficial",desc:"Localidad interior de Kelly County, entre Port Gellhorn y Ambrosia.",real:"—",tip:"Aparece en el mapa oficial junto a Capri Sound, en la costa."},
+ {n:"Draper Island",cat:"costa",x:148,y:382,zone:"Costa del Golfo · Kelly",status:"En el mapa oficial",desc:"Isla frente a Port Gellhorn, en la bahía de Draper, sobre la costa del Golfo.",real:"Islas barrera del Golfo de Florida",tip:"Figura en el mapa oficial junto a Draper Bay."},
+ {n:"Emerald River",cat:"naturaleza",x:342,y:282,zone:"Kelly County · interior",status:"En el mapa oficial",desc:"Río que cruza el interior de Kelly County entre Ambrosia y la costa del Golfo.",real:"Ríos del interior de Florida",tip:"Nombre impreso en el mapa oficial."},
+ {n:"Wild Hog Airfield",cat:"poi",x:282,y:332,zone:"Kelly County",status:"En el mapa oficial",desc:"Pista de aterrizaje rural en Kelly County, junto a Wild Hog Point.",real:"Pistas rurales de Florida",tip:"Aeródromo menor del mapa oficial: útil para avionetas."},
+ {n:"Hamlet",cat:"barrio",x:578,y:542,zone:"Mariana County · sur",status:"En el mapa oficial",desc:"Pequeño asentamiento del sur, en Mariana County, entre Watson Bay y los Grassrivers.",real:"Pueblos del sur de Florida",tip:"En el mapa oficial aparece con su propio correccional, el Hamlet Correctional Institution."},
+ {n:"Big Pine",cat:"barrio",x:556,y:578,zone:"Mariana County · sur",status:"En el mapa oficial",desc:"Localidad del sur de Mariana, en la ruta que baja hacia los cayos.",real:"Big Pine Key, Florida",tip:"Nombre con eco directo de los Cayos de Florida."},
+ {n:"Key Lento",cat:"costa",x:520,y:622,zone:"Leonida Keys · oeste",status:"En el mapa oficial",desc:"Uno de los cayos principales de la cadena: el punto donde la carretera de los Keys toca las islas del sur.",real:"Primeros Cayos de Florida",tip:"En el mapa oficial es de los cayos nombrados de la cadena."},
+ {n:"Shoeless Keys",cat:"costa",x:654,y:618,zone:"Leonida Keys · este",status:"En el mapa oficial",desc:"Grupo de cayos al este de la cadena principal, en el extremo sur del estado.",real:"Cayos menores de Florida",tip:"Aparecen en el mapa oficial dentro de Mariana County."},
+ {n:"Maroon Key",cat:"costa",x:612,y:630,zone:"Leonida Keys",status:"En el mapa oficial",desc:"Cayo de la cadena sur, entre Corsair Key y los Shoeless Keys.",real:"—",tip:"Nombre impreso en el mapa oficial."},
+ {n:"Corsair Key",cat:"costa",x:566,y:632,zone:"Leonida Keys",status:"En el mapa oficial",desc:"Cayo con nombre de corsario en la cadena de los Leonida Keys.",real:"—",tip:"Figura en el mapa oficial de los Keys."},
+ {n:"Pelican Valley",cat:"naturaleza",x:478,y:522,zone:"Mariana County · sur",status:"En el mapa oficial",desc:"Valle y zona húmeda del sur de Mariana, tierra de pelícanos entre canales y marismas.",real:"Valles y marismas del sur de Florida",tip:"En el mapa oficial está junto al río Pelican."},
+ {n:"Cottonmouth Lake",cat:"naturaleza",x:502,y:498,zone:"Mariana County",status:"En el mapa oficial",desc:"Lago de los Grassrivers nombrado por la serpiente boca de algodón: aguas quietas y caimanes.",real:"Lagos de los Everglades",tip:"Nombre impreso en el mapa oficial, en zona de pantano."},
+ {n:"Gambit Bay",cat:"costa",x:622,y:562,zone:"Mariana County · costa sur",status:"En el mapa oficial",desc:"Bahía de la costa sur, entre Watson Bay y la salida hacia los Keys.",real:"Bahías del sur de Florida",tip:"Ya se citaba en material previo y quedó en el mapa oficial."},
+ {n:"Mile Zero Air Station",cat:"poi",x:682,y:598,zone:"Extremo sur · Keys",status:"En el mapa oficial",desc:"Estación aérea en el extremo sur de la cadena de cayos: la 'milla cero' de Leonida.",real:"Estaciones navales de Key West",tip:"El punto más al sur del mapa oficial."},
+ {n:"Henry J. Edwards Airport",cat:"poi",x:438,y:518,zone:"Mariana County · suroeste",status:"En el mapa oficial",desc:"Aeropuerto regional del suroeste, puerta aérea de la zona de Grassrivers.",real:"Aeropuertos regionales de Florida",tip:"Nombre completo impreso en el mapa oficial."},
+ {n:"Paradise RV Park",cat:"poi",x:402,y:442,zone:"Suroeste interior",status:"En el mapa oficial",desc:"Parque de casas rodantes en el interior suroeste: caravanas, fogatas y vida tranquila.",real:"Parques de RV de Florida",tip:"Figura en el mapa oficial en Mariana County."},
+ {n:"Ocean View Hotel",cat:"poi",x:830,y:476,zone:"Ocean Beach · Vice City",status:"Visto en tráileres",desc:"El hotel frente al mar de Ocean Beach, guiño al hotel del Vice City clásico de 2002.",real:"Hoteles de Ocean Drive, Miami",tip:"Nombre visto en la cartelería de los tráileres."},
+ {n:"Casa segura de Jason",cat:"poi",x:542,y:608,zone:"Leonida Keys",status:"Confirmado por Rockstar",desc:"La casa de Jason Duval en los Keys: su base entre barcos, muelles y encargos de Brian Heder.",real:"Casas sobre el agua de los Cayos",tip:"Rockstar la presenta como el hogar de Jason en los Keys."},
+ {n:"Sahara Arena",cat:"poi",x:722,y:368,zone:"Vice City",status:"En el mapa oficial",desc:"La arena de eventos y deportes de Vice City, junto al centro de datos de Sahara Network.",real:"Arenas de Miami",tip:"Nombre impreso en el mapa oficial."},
+ {n:"Hotel Boardwalk",cat:"poi",x:836,y:442,zone:"Vice Beach · Vice City",status:"Visto en tráileres",desc:"Hotel sobre el paseo marítimo de Vice Beach, en la franja de hoteles de la isla barrera.",real:"Hoteles del paseo de Miami Beach",tip:"Citada entre los hoteles nombrados del material oficial."},
+ {n:"The Rusty Anchor",cat:"poi",x:212,y:372,zone:"Port Gellhorn",status:"Visto en tráileres",desc:"Bar de puerto en Port Gellhorn: el 'ancla oxidada', punto de reunión de la costa olvidada.",real:"Bares portuarios del Golfo",tip:"Nombre visto en el material promocional."},
+ {n:"Jack of Hearts",cat:"poi",x:742,y:458,zone:"Vice City",status:"Visto en material oficial",desc:"Local nocturno de Vice City citado entre los venues con nombre del juego.",real:"Clubes de Miami",tip:"Figura en los listados de lugares revelados."},
+ {n:"Paradise Garage",cat:"poi",x:660,y:548,zone:"Watson Bay",status:"Material oficial de ediciones",desc:"El garaje de Watson Bay donde la Ultimate Edition guarda el Dominator buggy del 67.",real:"—",tip:"Dato directo del material oficial de la Ultimate Edition."},
+ {n:"Rideout Customs",cat:"poi",x:664,y:424,zone:"Vice City · oeste",status:"Material oficial de ediciones",desc:"Taller de personalización de vehículos de Vice City, uno de los dos mod shops de la Ultimate Edition.",real:"Talleres custom de Miami",tip:"Confirmado en la descripción oficial de la edición."},
+ {n:"One-Eyed Willie's",cat:"poi",x:524,y:272,zone:"Lago Leonida",status:"Material oficial de ediciones",desc:"Tienda y taller off-road a orillas del Lago Leonida, el otro mod shop de la Ultimate Edition.",real:"—",tip:"El material oficial lo ubica en Lake Leonida."},
+ {n:"PTT Youngin$ Compound",cat:"poi",x:748,y:528,zone:"Southside · Vice City",status:"Material oficial de ediciones",desc:"El complejo de la banda PTT Youngin$ en Southside, asaltable según el material de la Ultimate Edition.",real:"—",tip:"Confirmado por la descripción oficial de la edición."},
+ {n:"Vice City Oceanarium",cat:"poi",x:812,y:398,zone:"Vice Beach · Vice City",status:"En el mapa oficial",desc:"El oceanario de Vice City, sobre la isla barrera: acuarios y espectáculos marinos frente al Atlántico.",real:"Miami Seaquarium",tip:"Nombre impreso en el mapa oficial."}
+];
+
+var selected = 0, filter = "all", query = "", explored = {}, hiddenCats = {}, showAll = true, onlyExplored = false;
+var pinsG = document.getElementById('pins');
+var grid = document.getElementById('grid');
+var detail = document.getElementById('detail');
+
+function matches(l){
+  if(!showAll) return false;
+  if(hiddenCats[l.cat]) return false;
+  if(onlyExplored && !explored[LOCS.indexOf(l)]) return false;
+  if(filter!=="all" && l.cat!==filter) return false;
+  if(!query) return true;
+  var hay=(l.n+" "+l.zone+" "+l.desc+" "+l.real+" "+CATS[l.cat].label).toLowerCase();
+  return hay.indexOf(query)>-1;
+}
+function renderPins(){
+  pinsG.innerHTML = LOCS.map(function(l,i){
+    var c=CATS[l.cat].color, m=matches(l);
+    return '<g class="pin'+(m?'':' dim')+(i===selected?' active':'')+'" data-i="'+i+'" transform="translate('+l.x+','+l.y+')" role="button" aria-label="'+l.n+'" tabindex="0">'
+      +'<circle class="halo" r="15" fill="transparent"/>'
+      +'<circle class="core" r="11" fill="'+c+'"/>'
+      +'<text y="0" dominant-baseline="central" font-size="'+(i>=9?'9':'11.5')+'">'+(i+1)+'</text></g>';
+  }).join("");
+  var nodes=pinsG.querySelectorAll('.pin');
+  for(var k=0;k<nodes.length;k++){
+    nodes[k].addEventListener('click',function(){ selectLoc(+this.getAttribute('data-i'), true); });
+    nodes[k].addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectLoc(+this.getAttribute('data-i'), true);} });
+  }
+}
+function renderGrid(){
+  var vis=0;
+  grid.innerHTML = LOCS.map(function(l,i){
+    if(!matches(l)) return "";
+    vis++;
+    return '<button class="card'+(i===selected?' sel':'')+'" data-i="'+i+'">'
+      +'<span class="top"><h3>'+l.n+'</h3><span class="num">'+(i+1)+'</span></span>'
+      +'<p>'+l.desc+'</p>'
+      +'<span class="meta"><span class="badge">'+CATS[l.cat].label+'</span>'
+      +(explored[i]?'<span class="done-tag">✓ Explorado</span>':'')+'</span></button>';
+  }).join("");
+  document.getElementById('empty').hidden = vis>0;
+  document.getElementById('count').textContent = vis+" de "+LOCS.length+" visibles";
+  renderCatSections();
+  var cards=grid.querySelectorAll('.card');
+  for(var k=0;k<cards.length;k++) cards[k].addEventListener('click',function(){ selectLoc(+this.getAttribute('data-i'), true); });
+}
+function renderDetail(){
+  var l=LOCS[selected], done=!!explored[selected];
+  detail.style.display='';
+  detail.innerHTML =
+    '<button class="detail-close" id="closeDetail" aria-label="Cerrar ficha">✕</button>'
+    +'<div class="badges"><span class="badge" style="border-color:'+CATS[l.cat].color+'">'+CATS[l.cat].label+'</span>'
+    +'<span class="badge status">'+l.status+'</span>'
+    +(done?'<span class="badge">✓ Explorado</span>':'')+'</div>'
+    +'<h2>'+(selected+1)+'. '+l.n+'</h2>'
+    +'<p class="region">'+l.zone+'</p>'
+    +'<p>'+l.desc+'</p>'
+    +'<dl>'
+    +'<div><dt>Inspiración real</dt><dd>'+l.real+'</dd></div>'
+    +'<div><dt>Qué se sabe</dt><dd>'+l.tip+'</dd></div>'
+    +'</dl>'
+    +'<button class="explore-btn'+(done?' done':'')+'" id="expBtn">'+(done?'✓ Explorado en esta visita':'Marcar como explorado')+'</button>';
+  document.getElementById('expBtn').addEventListener('click',function(){
+    if(explored[selected]) delete explored[selected]; else explored[selected]=1;
+    updateProgress(); renderDetail(); renderGrid(); renderPins();
+  });
+  document.getElementById('closeDetail').addEventListener('click',function(){
+    detail.style.display='none';
+  });
+}
+function updateProgress(){
+  var n=Object.keys(explored).length;
+  document.getElementById('progText').textContent = n+" de "+LOCS.length;
+  document.getElementById('barFill').style.width = (n/LOCS.length*100)+"%";
+  var cc=document.getElementById('completeCount'); if(cc) cc.textContent=n;
+  var ic=document.getElementById('incompleteCount'); if(ic) ic.textContent=(LOCS.length-n);
+}
+function selectLoc(i, scroll){
+  selected=i; renderPins(); renderDetail(); renderGrid();
+  if(scroll && window.innerWidth<=860){ detail.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+function renderCatSections(){
+  var host=document.getElementById('catSections');
+  if(!host) return;
+  host.innerHTML = Object.keys(CATS).map(function(k){
+    var total=0, i;
+    for(i=0;i<LOCS.length;i++) if(LOCS[i].cat===k) total++;
+    var rows="";
+    for(i=0;i<LOCS.length;i++){
+      var l=LOCS[i];
+      if(l.cat!==k || !matches(l)) continue;
+      rows+='<button class="loc-row'+(i===selected?' sel':'')+'" data-i="'+i+'">'
+        +'<span class="n" style="background:'+CATS[k].color+'">'+(i+1)+'</span>'
+        +'<span class="tx"><span class="nm">'+l.n+'</span><span class="zn">'+l.zone+'</span></span>'
+        +(explored[i]?'<span class="done">✓</span>':'')+'</button>';
+    }
+    return '<section class="cat-sec"><div class="cat-head"><h3><i class="dot" style="background:'+CATS[k].color+'"></i>'+CATS[k].label+' <span class="cnt">'+total+'</span></h3>'
+      +'<button class="showhide" data-cat="'+k+'" aria-label="Mostrar u ocultar '+CATS[k].label+'">'+(hiddenCats[k]?'SHOW':'HIDE')+'</button></div>'
+      +(hiddenCats[k]?'':'<div class="cat-rows">'+(rows||'<p class="cat-empty">Sin resultados con este filtro.</p>')+'</div>')
+      +'</section>';
+  }).join("");
+  var sh=host.querySelectorAll('.showhide');
+  for(var a=0;a<sh.length;a++) sh[a].addEventListener('click',function(){
+    var c=this.getAttribute('data-cat');
+    if(hiddenCats[c]) delete hiddenCats[c]; else hiddenCats[c]=1;
+    renderPins(); renderGrid();
+  });
+  var lr=host.querySelectorAll('.loc-row');
+  for(var b=0;b<lr.length;b++) lr[b].addEventListener('click',function(){
+    selectLoc(+this.getAttribute('data-i'), false);
+    document.getElementById('stage').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+}
+/* chips + legend */
+var chipDefs=[["all","Todas"]].concat(Object.keys(CATS).map(function(k){return [k,CATS[k].label];}));
+document.getElementById('chips').innerHTML = chipDefs.map(function(c){
+  return '<button class="chip" data-f="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+c[1]+'</button>';
+}).join("");
+document.getElementById('legend').innerHTML = Object.keys(CATS).map(function(k){
+  return '<span><i class="dot" style="background:'+CATS[k].color+'"></i>'+CATS[k].label+'</span>';
+}).join("");
+var chipBtns=document.querySelectorAll('.chip');
+for(var k=0;k<chipBtns.length;k++) chipBtns[k].addEventListener('click',function(){
+  filter=this.getAttribute('data-f');
+  for(var j=0;j<chipBtns.length;j++) chipBtns[j].setAttribute('aria-pressed', chipBtns[j]===this ? 'true':'false');
+  renderPins(); renderGrid();
+});
+document.getElementById('q').addEventListener('input',function(){ query=this.value.trim().toLowerCase(); renderPins(); renderGrid(); });
+
+/* zoom + pan */
+var scale=1, tx=0, ty=0, world=document.getElementById('world');
+function applyT(){ world.setAttribute('transform','translate('+tx+','+ty+') scale('+scale+')'); }
+document.getElementById('zIn').addEventListener('click',function(){ scale=Math.min(2.6, scale*1.3); applyT(); });
+document.getElementById('zOut').addEventListener('click',function(){ scale=Math.max(1, scale/1.3); if(scale===1){tx=0;ty=0;} applyT(); });
+document.getElementById('zReset').addEventListener('click',function(){ scale=1; tx=0; ty=0; applyT(); });
+var vp=document.getElementById('viewport'), drag=null;
+vp.addEventListener('pointerdown',function(e){ drag={x:e.clientX,y:e.clientY,tx:tx,ty:ty}; });
+vp.addEventListener('pointermove',function(e){ if(!drag) return; var r=vp.getBoundingClientRect(); var f=900/r.width; tx=drag.tx+(e.clientX-drag.x)*f; ty=drag.ty+(e.clientY-drag.y)*f; applyT(); });
+window.addEventListener('pointerup',function(){ drag=null; });
+
+/* IGN-style sidebar controls */
+function syncChips(){
+  for(var j=0;j<chipBtns.length;j++){
+    var f=chipBtns[j].getAttribute('data-f');
+    chipBtns[j].setAttribute('aria-pressed', f===filter ? 'true':'false');
+  }
+}
+var toggleAllBtn=document.getElementById('toggleAll');
+if(toggleAllBtn) toggleAllBtn.addEventListener('click',function(){
+  showAll=!showAll;
+  this.textContent=showAll?'HIDE':'SHOW';
+  renderPins(); renderGrid();
+});
+var qaExp=document.getElementById('qaExplored');
+if(qaExp) qaExp.addEventListener('click',function(){
+  onlyExplored=!onlyExplored;
+  this.setAttribute('aria-pressed', onlyExplored?'true':'false');
+  this.classList.toggle('on', onlyExplored);
+  renderPins(); renderGrid();
+});
+var qaReg=document.getElementById('qaRegions');
+if(qaReg) qaReg.addEventListener('click',function(){
+  filter = (filter==='region') ? 'all' : 'region';
+  this.setAttribute('aria-pressed', filter==='region'?'true':'false');
+  this.classList.toggle('on', filter==='region');
+  syncChips(); renderPins(); renderGrid();
+});
+var qaRes=document.getElementById('qaReset');
+if(qaRes) qaRes.addEventListener('click',function(){
+  filter='all'; query=''; onlyExplored=false; hiddenCats={}; showAll=true;
+  document.getElementById('q').value='';
+  if(toggleAllBtn) toggleAllBtn.textContent='HIDE';
+  if(qaExp){ qaExp.setAttribute('aria-pressed','false'); qaExp.classList.remove('on'); }
+  if(qaReg){ qaReg.setAttribute('aria-pressed','false'); qaReg.classList.remove('on'); }
+  scale=1; tx=0; ty=0; applyT();
+  syncChips(); renderPins(); renderGrid();
+});
+var layerBtn=document.getElementById('layerBtn');
+if(layerBtn) layerBtn.addEventListener('click',function(){
+  var st=document.getElementById('stage');
+  var on=st.classList.toggle('terrain');
+  this.setAttribute('aria-pressed', on?'true':'false');
+  this.textContent = on?'MAPA':'TERRENO';
+});
+vp.addEventListener('wheel',function(e){
+  e.preventDefault();
+  var d=e.deltaY<0?1.15:0.87;
+  scale=Math.min(3.2, Math.max(1, scale*d));
+  if(scale===1){ tx=0; ty=0; }
+  applyT();
+},{passive:false});
+
+renderPins(); renderGrid(); renderDetail(); updateProgress();
+</script>
+</body>
+</html>
