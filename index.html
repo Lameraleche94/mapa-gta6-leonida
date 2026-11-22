@@ -6,20 +6,20 @@
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:,">
 <title>Mapa interactivo de GTA 6 — Leonida y Vice City: lugares y secretos</title>
-<meta name="description" content="Mapa interactivo de GTA 6 (Grand Theft Auto VI) sobre el mapa oficial de Leonida: explora Vice City y los 5 condados con 81 lugares, regiones, puntos de interés y los sitios reales de Florida que los inspiraron. Gratis, en español.">
-<meta name="keywords" content="GTA 6, Grand Theft Auto VI, mapa interactivo, mapa GTA 6, Leonida, Vice City, lugares GTA 6, mapa de Leonida, mapa oficial GTA 6">
+<meta name="description" content="Mapa interactivo de GTA 6 (Grand Theft Auto VI) sobre el mapa oficial de Leonida: explora Vice City y los 5 condados con 81 lugares y 12 secretos y easter eggs verificados (abducción OVNI, apartamento de Dexter, coche de Brian O'Conner y más). Gratis, en español.">
+<meta name="keywords" content="GTA 6, Grand Theft Auto VI, mapa interactivo, mapa GTA 6, Leonida, Vice City, lugares GTA 6, mapa de Leonida, mapa oficial GTA 6, secretos GTA 6, easter eggs GTA 6, coleccionables GTA 6">
 <meta name="robots" content="index, follow">
 <meta name="author" content="PINEDA — @pineda_gta6">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Mapa interactivo de GTA 6 — Leonida y Vice City">
-<meta property="og:description" content="Sobre el mapa oficial de Rockstar: 81 lugares, regiones y secretos de GTA 6 en Leonida y Vice City, con la inspiración real de cada sitio.">
+<meta property="og:description" content="Sobre el mapa oficial de Rockstar: 81 lugares y 12 secretos verificados de GTA 6 en Leonida y Vice City.">
 <meta property="og:image" content="hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mapa interactivo de GTA 6 — Leonida y Vice City">
-<meta name="twitter:description" content="81 lugares y secretos del mapa oficial de GTA 6 en Leonida y Vice City. Explóralo gratis, en español.">
+<meta name="twitter:description" content="81 lugares y 12 secretos verificados del mapa oficial de GTA 6 en Leonida y Vice City. Explóralo gratis, en español.">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Mapa interactivo de GTA 6 — Leonida","inLanguage":"es","description":"Mapa interactivo de Grand Theft Auto VI sobre el mapa oficial de Leonida: Vice City y los 5 condados con 81 lugares, regiones y puntos de interés.","author":{"@type":"Person","name":"PINEDA"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Mapa interactivo de GTA 6 — Leonida","inLanguage":"es","description":"Mapa interactivo de Grand Theft Auto VI sobre el mapa oficial de Leonida: Vice City y los 5 condados con 81 lugares y una capa de secretos y coleccionables verificados.","author":{"@type":"Person","name":"PINEDA"}}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,6 +84,9 @@ h1,h2,h3{font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;margin:0
 .cat-head h3{font-size:.92rem;text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:.45rem;font-family:'Barlow',sans-serif;font-weight:700}
 .cat-head .cnt{color:var(--side-muted);font-weight:600}
 .cat-rows{margin:.25rem 0 .3rem}
+.cat-note{color:var(--side-muted);font-size:.84rem;line-height:1.45;margin:.35rem 0 .5rem}
+.badge.warn{color:#8a5a00;border-color:var(--orange);background:rgba(232,106,23,.12);font-weight:700}
+@media (prefers-color-scheme: dark){.badge.warn{color:#ffb066}}
 .cat-empty{color:var(--side-muted);font-size:.86rem;margin:.3rem 0 .5rem}
 .loc-row{display:flex;gap:.55rem;align-items:center;width:100%;text-align:left;background:none;border:none;color:var(--side-ink);padding:.42rem .35rem;border-radius:8px;cursor:pointer;font:inherit;min-height:2.25rem}
 .loc-row:hover{background:var(--side-panel)}
@@ -177,12 +180,12 @@ footer a{color:var(--cyan);display:inline-block;padding:.35rem 0}
       <div class="side-hero-veil">
         <p class="side-crumb">Grand Theft Auto VI · Guía del mapa</p>
         <h1>Mapa de <span class="neon">Leonida</span></h1>
-        <p>Sobre el mapa oficial de Rockstar: las 6 regiones y 81 lugares con nombre, reubicados en su sitio verdadero. Buscá, filtrá y tocá un marcador para ver su ficha y su cuadrícula.</p>
+        <p>Sobre el mapa oficial de Rockstar: las 6 regiones, 81 lugares con nombre y 12 secretos y coleccionables, ubicados en su sitio. Buscá, filtrá y tocá un marcador para ver su ficha y su cuadrícula.</p>
       </div>
     </div>
     <div class="side-body">
       <div class="track-card">
-        <div class="track-top"><span>Tu exploración</span><span id="progText">0 de 81</span></div>
+        <div class="track-top"><span>Tu exploración</span><span id="progText">0 de 93</span></div>
         <div class="bar" id="bar"><i id="barFill"></i></div>
         <p class="track-note">Abrí la ficha de un lugar y marcalo como explorado para seguir tu progreso en esta visita.</p>
       </div>
@@ -210,7 +213,7 @@ footer a{color:var(--cyan);display:inline-block;padding:.35rem 0}
       <div class="all-markers">
         <div class="am-head"><h2>Todos los marcadores</h2><button class="showhide" id="toggleAll" aria-label="Mostrar u ocultar todos los marcadores">HIDE</button></div>
         <div class="am-row"><span><span class="ok">✓</span> Completados</span><b id="completeCount">0</b></div>
-        <div class="am-row"><span>◐ Por explorar</span><b id="incompleteCount">81</b></div>
+        <div class="am-row"><span>◐ Por explorar</span><b id="incompleteCount">93</b></div>
       </div>
 
       <div class="loc-head"><h2>Ubicaciones</h2><span id="count"></span></div>
@@ -244,7 +247,7 @@ footer a{color:var(--cyan);display:inline-block;padding:.35rem 0}
       </div>
       <aside class="detail" id="detail" aria-live="polite"></aside>
       <div class="map-foot">
-        <p class="map-note">Mapa oficial © Rockstar Games — Sitio de fans, sin afiliación con Rockstar Games. La base es el póster oficial de Leonida publicado por Rockstar tras el lanzamiento: geografía, condados (Lummox, Kelly, Leonard, Vice-Dale y Mariana), carreteras y costa verdaderos del juego. Los 81 pines están reubicados sobre sus rótulos; los puntos sin rótulo en el póster van en su zona correcta de forma aproximada. Arrastrá para moverte, usá la rueda del mouse o + / − para acercar y leer los nombres, y el botón CUADRÍCULA para ver la retícula 1–9 / A–M del póster: cada ficha indica la cuadrícula de su lugar.</p>
+        <p class="map-note">Mapa oficial © Rockstar Games — Sitio de fans, sin afiliación con Rockstar Games. La base es el póster oficial de Leonida publicado por Rockstar tras el lanzamiento: geografía, condados (Lummox, Kelly, Leonard, Vice-Dale y Mariana), carreteras y costa verdaderos del juego. Los 81 pines de lugares están reubicados sobre sus rótulos; los puntos sin rótulo en el póster van en su zona correcta de forma aproximada. Los 12 pines de secretos y coleccionables van en su zona reportada por la comunidad, también de forma aproximada. Arrastrá para moverte, usá la rueda del mouse o + / − para acercar y leer los nombres, y el botón CUADRÍCULA para ver la retícula 1–9 / A–M del póster: cada ficha indica la cuadrícula de su lugar.</p>
         <div class="legend" id="legend"></div>
       </div>
     </section>
@@ -253,7 +256,7 @@ footer a{color:var(--cyan);display:inline-block;padding:.35rem 0}
 
 <div class="below">
   <div class="list-head"><h2>Localizaciones confirmadas y vistas hasta ahora</h2></div>
-  <p style="color:var(--muted);margin:.2rem 0 .8rem;line-height:1.5">Selección de 81 lugares con nombre, ahora ubicados sobre el póster oficial de Leonida: las 6 regiones de Rockstar más los barrios, islas, pueblos y puntos impresos en ese mapa y nombrados en tráileres y material oficial. Cada ficha muestra su referencia de cuadrícula del póster (columna 1–9 y fila A–M). Es una selección, no la lista total del juego: el mapa completo tiene cientos de puntos menores.</p>
+  <p style="color:var(--muted);margin:.2rem 0 .8rem;line-height:1.5">Selección de 93 marcadores sobre el póster oficial de Leonida: 81 lugares con nombre (las 6 regiones de Rockstar más los barrios, islas, pueblos y puntos impresos en ese mapa y nombrados en tráileres y material oficial) y 12 secretos y coleccionables verificados por la comunidad tras el lanzamiento. Cada ficha muestra su referencia de cuadrícula del póster (columna 1–9 y fila A–M); la de los secretos es aproximada y se marca con «≈». Es una selección, no la lista total del juego: el mapa completo tiene cientos de puntos menores.</p>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden>Ningún lugar coincide con ese filtro. Probá con “playa”, “Vice” o quitá el filtro.</div>
 </div>
@@ -271,7 +274,8 @@ var CATS = {
   barrio:{label:"Barrios y pueblos", color:"#ffb02e"},
   naturaleza:{label:"Naturaleza", color:"#3ecf6e"},
   costa:{label:"Costa e islas", color:"#2ec5d4"},
-  poi:{label:"Puntos de interés", color:"#c792ff"}
+  poi:{label:"Puntos de interés", color:"#c792ff"},
+  secreto:{label:"Secretos y coleccionables", color:"#ffd23e"}
 };
 var LOCS = [
  {n:"Vice City",cat:"region",x:590,y:652,zone:"Vice-Dale · costa este",status:"Confirmado por Rockstar",desc:"El glamour, el ajetreo y la codicia de América en una sola ciudad. La capital del sol y la fiesta de Leonida: rascacielos frente al mar, vida nocturna de neón, autopistas llenas y barrios donde cada cuadra tiene su propio negocio, legal o no.",real:"Miami, Florida",tip:"Es el centro del mapa y el punto de partida de Lucía tras salir de la prisión estatal."},
@@ -354,7 +358,19 @@ var LOCS = [
  {n:"Rideout Customs",cat:"poi",x:585,y:628,zone:"Vice City · oeste",status:"Material oficial de ediciones",desc:"Taller de personalización de vehículos de Vice City, uno de los dos mod shops de la Ultimate Edition.",real:"Talleres custom de Miami",tip:"Confirmado en la descripción oficial de la edición."},
  {n:"One-Eyed Willie's",cat:"poi",x:540,y:420,zone:"Lago Leonida",status:"Material oficial de ediciones",desc:"Tienda y taller off-road a orillas del Lago Leonida, el otro mod shop de la Ultimate Edition.",real:"—",tip:"El material oficial lo ubica en Lake Leonida."},
  {n:"PTT Youngin$ Compound",cat:"poi",x:614,y:814,zone:"Southside · Vice City",status:"Material oficial de ediciones",desc:"El complejo de la banda PTT Youngin$ en Southside, asaltable según el material de la Ultimate Edition.",real:"—",tip:"Confirmado por la descripción oficial de la edición."},
- {n:"Vice City Oceanarium",cat:"poi",x:657,y:751,zone:"Vice Beach · Vice City",status:"En el mapa oficial",desc:"El oceanario de Vice City, sobre la isla barrera: acuarios y espectáculos marinos frente al Atlántico.",real:"Miami Seaquarium",tip:"Nombre impreso en el mapa oficial."}
+ {n:"Vice City Oceanarium",cat:"poi",x:657,y:751,zone:"Vice Beach · Vice City",status:"En el mapa oficial",desc:"El oceanario de Vice City, sobre la isla barrera: acuarios y espectáculos marinos frente al Atlántico.",real:"Miami Seaquarium",tip:"Nombre impreso en el mapa oficial."},
+ {n:"El nido de huevos de Pascua literal",cat:"secreto",x:470,y:700,zone:"Torre de radio de Bluegrass · sur de Vice-Dale, al norte de Hamlet",status:"Verificado por la comunidad",desc:"Un Easter egg tomado al pie de la letra: un nido con huevos de colores espera en lo alto de una torre de radio. Al recoger uno y lanzarlo al vacío se activa una escena secreta.",real:"El término «easter egg» hecho literal por Rockstar",tip:"Subí hasta la plataforma más alta de la torre de radio de Bluegrass; el nido está en la cima.",src:"Dexerto"},
+ {n:"Abducción OVNI del Starlet Motel",cat:"secreto",x:250,y:420,zone:"Camino rural al noroeste del Starlet Motel · este de Port Gellhorn, Kelly",status:"Verificado por la comunidad",desc:"Encuentro nocturno: un coche con las luces parpadeantes marca un sendero hacia el bosque, donde un OVNI abduce a una mujer; al intentar ayudarla, terminás abducido vos. Desbloquea el trofeo «The Truth Is Out There».",real:"La tradición OVNI de GTA desde San Andreas",tip:"Requisitos: tras completar el Capítulo 1, ir solo y después de las 2:00 a. m.",src:"GameSpot"},
+ {n:"Rescate alienígena de South Point Airfield",cat:"secreto",x:480,y:900,zone:"South Point Airfield · Hamlet, Mariana",status:"Verificado por la comunidad",desc:"Secreto en tres partes tras la abducción: el personaje abducido sueña con la nave y aprende un código (normalmente 2134) que abre una instalación secreta junto a la torre de radio del aeródromo, donde retienen a un alienígena.",real:"—",tip:"El código sale del sueño posterior a la abducción; suele ser 2134.",src:"GameSpot"},
+ {n:"El apartamento de Dexter Morgan",cat:"secreto",x:695,y:615,zone:"Trinity Apartments · Washington Island, Vice City, cerca del Pay 'N' Spray",status:"Verificado por la comunidad",desc:"Referencia a la serie Dexter: los Trinity Apartments replican el edificio de Dexter Morgan. En el tejado hay un «kit» de asesino (cuchillo, cinta, cuerda y jeringa) y junto al edificio está amarrada su lancha, que se puede robar.",real:"Dexter (serie de televisión)",tip:"Buscá el kit en el tejado y la lancha amarrada junto al edificio.",src:"Dexerto"},
+ {n:"El coche de Brian O'Conner",cat:"secreto",x:680,y:595,zone:"Villa en Vespucci Island · Rialto Islands, al este de Vice City",status:"Verificado por la comunidad",desc:"Referencia a Fast & Furious: un Maibatsu Penumbra '97 verde, con alerón y franjas azules y blancas — el «Eclipse» de Brian O'Conner — espera en el garaje de una villa. Se puede robar y registrar en un Pay 'n' Spray.",real:"Fast & Furious: el Mitsubishi Eclipse de Brian O'Conner",tip:"Entrá al garaje de la villa; el coche queda registrado a tu nombre en un Pay 'n' Spray.",src:"Game Rant"},
+ {n:"El sombrero de Arthur Morgan",cat:"secreto",x:190,y:520,zone:"Venta de garaje al sur de Port Gellhorn · noroeste del taller Dirt Merchants, Kelly",status:"Verificado por la comunidad",desc:"Referencia a Red Dead Redemption 2: el sombrero de Arthur Morgan se vende como «Genuine Cowboy Hat» por $35 en una venta de garaje, apoyado sobre una funda de guitarra en un sofá.",real:"Red Dead Redemption 2: Arthur Morgan",tip:"Aparece en el Capítulo 2; cuesta $35 en la venta de garaje.",src:"Game8"},
+ {n:"Cool Dog, el perro rescatista en jet ski",cat:"secreto",x:280,y:900,zone:"Aguas abiertas de Gambit Bay · frente a la casa de Jason, costa suroeste de Mariana",status:"Verificado por la comunidad",desc:"Encuentro secreto: si te quedás varado nadando en mar abierto, un perro con gafas llega en jet ski, te rescata, te lleva a una playa llena de perros y te guía hasta un alijo de dinero.",real:"—",tip:"Quedate nadando sin vehículo en mar abierto hasta que aparezca.",src:"Game8"},
+ {n:"Avistamiento del Skunk Ape",cat:"secreto",x:350,y:990,zone:"Al sur del lago Cottonmouth · frente a la zona inicial del Capítulo 1 en Key Lento, Mariana",status:"Verificado por la comunidad",desc:"El «Bigfoot» de Leonida: aparece comiendo un ciervo y huye al acercarte. Explorando más la zona hay una efigie humana en un árbol que activa una escena en la que despertás junto al lago.",real:"El Skunk Ape, el críptido de los Everglades",tip:"Acercate despacio; la efigie en el árbol dispara la escena secreta.",src:"Game8"},
+ {n:"El barco robado a Michael (GTA V)",cat:"secreto",x:390,y:1000,zone:"Casa de Jason · Key Lento, Mariana",status:"Verificado por la comunidad",desc:"Referencia a GTA V: la lancha junto a la casa de Jason es la misma que le robaron a Michael en Los Santos — su GPS aún marca esa ciudad. En la casa también hay revistas con la cara de Fabien LaRouche.",real:"GTA V: la lancha robada de Michael De Santa",tip:"Revisá el GPS de la lancha y las revistas dentro de la casa.",src:"Game8"},
+ {n:"La casa de Belville de la foto de 2021",cat:"secreto",x:640,y:450,zone:"Belville · Leonard, al sureste del lago Leonida",status:"Reportado por la comunidad",desc:"Una casa que reproduce exactamente la que Rockstar mostró en una foto de San Andreas en 2021: palmeras, arbustos y cerca coinciden. La comunidad la localizó el día del lanzamiento.",real:"Foto promocional de Rockstar de 2021 (GTA San Andreas)",tip:"Compará la fachada con la foto de 2021: cada detalle coincide.",src:"GTAside",pending:1},
+ {n:"La isla SOS y el teléfono misterioso",cat:"secreto",x:60,y:900,zone:"Isla en el golfo de Leonida · muy al oeste de Watson Bay y Grassrivers, Mariana",status:"Reportado por la comunidad",desc:"Isla remota con dos mensajes gigantes escritos en la arena: «SOS» y «Send Beer». Junto a la primera S hay un teléfono con una grabación estilo found footage de terror, y se reportan fragmentos de meteorito en la isla.",real:"—",tip:"Buscá el teléfono junto a la primera letra S del «SOS».",src:"Showgamer",pending:1},
+ {n:"El planeador estrellado y la pistola legendaria",cat:"secreto",x:160,y:890,zone:"Bobcat Bight · islotes frente a la costa oeste del norte de Mariana",status:"Reportado por la comunidad",desc:"Un paramotor estrellado cuelga de las ramas de un árbol. Al disparar al paracaídas y bajar el aparato se obtiene la pistola legendaria única Turnt Nipper .38.",real:"—",tip:"Llegá en lancha o moto de agua y disparale al paracaídas para bajarlo.",src:"Showgamer",pending:1}
 ];
 
 var selected = 0, filter = "all", query = "", explored = {}, hiddenCats = {}, showAll = true, onlyExplored = false;
@@ -394,6 +410,7 @@ function renderGrid(){
       +'<span class="top"><h3>'+l.n+'</h3><span class="num">'+(i+1)+'</span></span>'
       +'<p>'+l.desc+'</p>'
       +'<span class="meta"><span class="badge">'+CATS[l.cat].label+'</span>'
+      +(l.pending?'<span class="done-tag" style="color:var(--orange)">⚠ Por confirmar</span>':'')
       +(explored[i]?'<span class="done-tag">✓ Explorado</span>':'')+'</span></button>';
   }).join("");
   document.getElementById('empty').hidden = vis>0;
@@ -415,14 +432,16 @@ function renderDetail(){
     '<button class="detail-close" id="closeDetail" aria-label="Cerrar ficha">✕</button>'
     +'<div class="badges"><span class="badge" style="border-color:'+CATS[l.cat].color+'">'+CATS[l.cat].label+'</span>'
     +'<span class="badge status">'+l.status+'</span>'
+    +(l.pending?'<span class="badge warn">⚠ Por confirmar</span>':'')
     +(done?'<span class="badge">✓ Explorado</span>':'')+'</div>'
     +'<h2>'+(selected+1)+'. '+l.n+'</h2>'
     +'<p class="region">'+l.zone+'</p>'
     +'<p>'+l.desc+'</p>'
     +'<dl>'
-    +'<div><dt>Cuadrícula del póster oficial</dt><dd><strong>'+g.code+'</strong> — columna '+g.col+', fila '+g.row+' de la retícula 1–9 / A–M</dd></div>'
+    +'<div><dt>Cuadrícula del póster oficial</dt><dd><strong>'+(l.cat==='secreto'?'≈':'')+g.code+'</strong> — columna '+g.col+', fila '+g.row+' de la retícula 1–9 / A–M'+(l.cat==='secreto'?' (posición aproximada sobre el póster)':'')+'</dd></div>'
     +'<div><dt>Inspiración real</dt><dd>'+l.real+'</dd></div>'
     +'<div><dt>Qué se sabe</dt><dd>'+l.tip+'</dd></div>'
+    +(l.src?'<div><dt>Fuente</dt><dd>'+l.src+'</dd></div>':'')
     +'</dl>'
     +'<button class="explore-btn'+(done?' done':'')+'" id="expBtn">'+(done?'✓ Explorado en esta visita':'Marcar como explorado')+'</button>';
   document.getElementById('expBtn').addEventListener('click',function(){
@@ -461,6 +480,7 @@ function renderCatSections(){
     }
     return '<section class="cat-sec"><div class="cat-head"><h3><i class="dot" style="background:'+CATS[k].color+'"></i>'+CATS[k].label+' <span class="cnt">'+total+'</span></h3>'
       +'<button class="showhide" data-cat="'+k+'" aria-label="Mostrar u ocultar '+CATS[k].label+'">'+(hiddenCats[k]?'SHOW':'HIDE')+'</button></div>'
+      +(k==='secreto'?'<p class="cat-note">Capa en crecimiento: secretos verificados por la comunidad. Sistemas de coleccionables del juego: 90 tarjetas coleccionables, 89 escaneos WAiNK, 29 revistas, 7 lugares de meditación, 7 intercambios de libros, 7 playlists únicas y 5 murales “1010” repartidos por todo Leonida.</p>':'')
       +(hiddenCats[k]?'':'<div class="cat-rows">'+(rows||'<p class="cat-empty">Sin resultados con este filtro.</p>')+'</div>')
       +'</section>';
   }).join("");
